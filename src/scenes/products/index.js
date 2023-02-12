@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { useGetProductsQuery } from "state/api";
-import { fontSize } from "@mui/system";
 
 const Product = ({
   _id,
@@ -86,7 +85,8 @@ const Product = ({
 const Products = () => {
   const { data, isLoading } = useGetProductsQuery();
   const isNonMobile = useMediaQuery("(min-width:1000px)");
-
+  console.log("data", data);
+  // console.log(data.stat[0].yearlySalesTotal);
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="PRODUCTS" subtitle="See your list of products." />
@@ -102,18 +102,9 @@ const Products = () => {
             "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
           }}
         >
-          {Object.values(data).map(
-            ({
-              _id,
-              name,
-              description,
-              price,
-              rating,
-              category,
-              stat,
-              supply,
-            }) => (
-              <Product
+          {Object.values(data).map(({ data }) => ({
+            // const {_id} = data
+            /* <Product
                 key={_id}
                 _id={_id}
                 name={name}
@@ -123,9 +114,8 @@ const Products = () => {
                 category={category}
                 supply={supply}
                 stat={stat}
-              />
-            )
-          )}
+              /> */
+          }))}
         </Box>
       ) : (
         <>Loading...</>
